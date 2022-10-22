@@ -11,7 +11,7 @@
 #include <stdio.h>
 
 #define TAX 0.095                                                       // Macro for Tax Percentage
-
+ 
 typedef struct                                                          // Struct
 {
     int item;
@@ -92,6 +92,7 @@ void printGrandTotal(double total)                                      // Void 
 
 int main(void)                                                          // Main function
 {
+    
     int itemOne, itemTwo, itemThree, itemFour;
     int itemCount;
     printf("\n\n     -------------\n");
@@ -114,9 +115,9 @@ int main(void)                                                          // Main 
     switch (itemCount)
     {
     case 1:
-        printf("Choose First Item: ");
-        scanf("%d", &itemOne);
-        printf("--------------------------\n");
+        int randomNumber1 = rand() % 3 + 1; 
+        itemOne = randomNumber1;
+        printf("Randomly Selected Item Number: %d\n", itemOne);
         PtrToMenu matchPtr;
         matchPtr = searchItem(MenuTable, MenuTableEntries, itemOne);
         printf("Item Selected: %s is $%1.2f\n", matchPtr->itemName, matchPtr->price);
@@ -128,11 +129,13 @@ int main(void)                                                          // Main 
         break;
 
     case 2:
-        printf("Choose First Item Number: ");
-        scanf("%d", &itemOne);
-        printf("Choose Second Item Number: ");
-        scanf("%d", &itemTwo);
-        printf("--------------------------\n");
+        int randomNumber2 = rand() % 3 + 1; 
+        int randomNumber3 = rand() % 1 + 1;
+        itemOne = randomNumber2;
+        itemTwo = randomNumber3;
+        printf("Randomly Selected Item Number: %d\n", itemOne);
+        printf("Randomly Selected Item Number: %d\n", itemTwo);
+        
         PtrToMenu matchPtr1;
         matchPtr1 = searchItem(MenuTable, MenuTableEntries, itemOne);
         printf("Item 1: %s is $%1.2f\n", matchPtr1->itemName, matchPtr1->price);
@@ -146,14 +149,15 @@ int main(void)                                                          // Main 
         printGrandTotal(total);
         break;
     case 3:
-
-        printf("Choose First Item Number: ");
-        scanf("%d", &itemOne);
-        printf("Choose Second Item Number: ");
-        scanf("%d", &itemTwo);
-        printf("Choose Third Item Number: ");
-        scanf("%d", &itemThree);
-        printf("--------------------------\n");
+        int randomNumber5 = rand() % 3 + 1; 
+        int randomNumber6 = rand() % 1 + 1;
+        int randomNumber7 = rand() % 2 + 1; 
+        itemOne = randomNumber5;
+        itemTwo = randomNumber6;
+        itemThree = randomNumber7;
+        printf("Randomly Selected Item Number: %d\n", itemOne);
+        printf("Randomly Selected Item Number: %d\n", itemTwo);
+        printf("Randomly Selected Item Number: %d\n", itemThree);
 
         PtrToMenu matchPtrOne;
         matchPtrOne = searchItem(MenuTable, MenuTableEntries, itemOne);
@@ -174,16 +178,18 @@ int main(void)                                                          // Main 
         break;
 
     case 4:
-        printf("Choose First Item Number: ");
-        scanf("%d", &itemOne);
-        printf("Choose Second Item Number: ");
-        scanf("%d", &itemTwo);
-        printf("Choose Third Item Number: ");
-        scanf("%d", &itemThree);
-        printf("Choose Fourth Item Number: ");
-        scanf("%d", &itemFour);
-        printf("--------------------------\n");
-
+        int randomNumber8 = rand() % 3 + 1; 
+        int randomNumber9 = rand() % 1 + 1;
+        int randomNumber10 = rand() % 3 + 1; 
+        int randomNumber11= rand() % 2 + 1;
+        itemOne = randomNumber8;
+        itemTwo = randomNumber9;
+        itemThree = randomNumber10;
+        itemFour = randomNumber11;
+        printf("Randomly Selected Item Number: %d\n", itemOne);
+        printf("Randomly Selected Item Number: %d\n", itemTwo);
+        printf("Randomly Selected Item Number: %d\n", itemThree);
+        printf("Randomly Selected Item Number: %d\n", itemFour);
         PtrToMenu ptrOne;
         ptrOne = searchItem(MenuTable, MenuTableEntries, itemOne);
         printf("Item 1: %s is $%1.2f\n", ptrOne->itemName, ptrOne->price);

@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define TAX 0.095                                                       // Macro for Tax Percentage
+//#define TAX 0.095                                                       // Macro for Tax Percentage
  
 typedef struct                                                          // Struct
 {
@@ -66,32 +66,30 @@ double calculateFourItems(PtrToMenu ptr1, PtrToMenu ptr2, PtrToMenu ptr3, PtrToM
     return (ptr1->price + ptr2->price + ptr3->price + ptr4->price);     // Calculte for One Item
 }
 
-double calculateTip(double total, int tipPercentage)                    // Calculate Tips
+void printGrandTotal(double total, double tip, double tax)              // Print Grand Total function
 {
-    return (total * (tipPercentage * 0.01));
-}
-
-double calculateTax(double total)                                       // Calculate Tax
-{
-    return (total * TAX);
-}
-
-void printGrandTotal(double total)                                      // Void function for display
-{
-    double tip;
+    double calculateTip = total *(tip * 0.01);
+    double calculateTax = total * (tax * 0.01);
     double grandTotal;
-    printf("Enter Tip %%\t\t    : ");
-    scanf("%lf", &tip);
-    printf("Total Tip\t\t    : $%1.2f\n", calculateTip(total, tip));
-    printf("Tax 9.5%%\t\t    : $%1.2f\n", calculateTax(total));
+   
+    printf("Total Tip\t\t    : $%1.2f\n", calculateTip);
+    printf("Tax 9.5%%\t\t    : $%1.2f\n", calculateTax);
     printf("-------------------------------------\n");
-    grandTotal = total + calculateTip(total, tip) + calculateTax(total);
+    grandTotal = total + calculateTip + calculateTax;
     printf("Your Grand Total\t    : $%1.2f\n", grandTotal);
     printf("-------------------------------------\n\n");
 }
 
-int main(void)                                                          // Main function
+int main(int argc, char *argv[])                                    // Main function, passing tips & tax as arguments
 {
+    printf("The count of Argc and Argv[]\n");
+    for(int i = 0; i < argc; i++) {
+        printf("arg %d - %s\n", i, argv[i]);
+    }
+    printf("argc- %d\n", argc);
+    printf("-------------------------------------\n");
+    int tip = atoi(argv[1]);
+    int tax = atoi(argv[2]);
     
     int itemOne, itemTwo, itemThree, itemFour;
     int itemCount;
@@ -118,14 +116,15 @@ int main(void)                                                          // Main 
         int randomNumber1 = rand() % 3 + 1; 
         itemOne = randomNumber1;
         printf("Randomly Selected Item Number: %d\n", itemOne);
+        printf("-------------------------------------\n");
         PtrToMenu matchPtr;
         matchPtr = searchItem(MenuTable, MenuTableEntries, itemOne);
         printf("Item Selected: %s is $%1.2f\n", matchPtr->itemName, matchPtr->price);
-        printf("--------------------------\n");
+        printf("-------------------------------------\n");
         total = calculateOneItems(matchPtr);
 
         printf("Sub-Total for ONE item is   : $%1.2f\n", total);
-        printGrandTotal(total);
+        printGrandTotal(total, tip, tax);
         break;
 
     case 2:
@@ -135,7 +134,7 @@ int main(void)                                                          // Main 
         itemTwo = randomNumber3;
         printf("Randomly Selected Item Number: %d\n", itemOne);
         printf("Randomly Selected Item Number: %d\n", itemTwo);
-        
+        printf("-------------------------------------\n");
         PtrToMenu matchPtr1;
         matchPtr1 = searchItem(MenuTable, MenuTableEntries, itemOne);
         printf("Item 1: %s is $%1.2f\n", matchPtr1->itemName, matchPtr1->price);
@@ -143,10 +142,10 @@ int main(void)                                                          // Main 
         PtrToMenu matchPtr2;
         matchPtr2 = searchItem(MenuTable, MenuTableEntries, itemTwo);
         printf("Item 2: %s is $%1.2f\n", matchPtr2->itemName, matchPtr2->price);
-        printf("--------------------------\n");
+        printf("-------------------------------------\n");
         total = calculateTwoItems(matchPtr1, matchPtr2);
         printf("Sub-Total for TWO items is  : $%1.2f\n", total);
-        printGrandTotal(total);
+        printGrandTotal(total, tip, tax);
         break;
     case 3:
         int randomNumber5 = rand() % 3 + 1; 
@@ -158,7 +157,7 @@ int main(void)                                                          // Main 
         printf("Randomly Selected Item Number: %d\n", itemOne);
         printf("Randomly Selected Item Number: %d\n", itemTwo);
         printf("Randomly Selected Item Number: %d\n", itemThree);
-
+        printf("-------------------------------------\n");
         PtrToMenu matchPtrOne;
         matchPtrOne = searchItem(MenuTable, MenuTableEntries, itemOne);
         printf("Item 1: %s is $%1.2f\n", matchPtrOne->itemName, matchPtrOne->price);
@@ -170,11 +169,11 @@ int main(void)                                                          // Main 
         PtrToMenu matchPtrThree;
         matchPtrThree = searchItem(MenuTable, MenuTableEntries, itemThree);
         printf("Item 3: %s is $%1.2f\n", matchPtrThree->itemName, matchPtrThree->price);
-        printf("--------------------------\n");
+        printf("-------------------------------------\n");
         total = calculateThreeItems(matchPtrOne, matchPtrTwo, matchPtrThree);
         printf("Sub-Total for THREE items is: $%1.2f\n", total);
 
-        printGrandTotal(total);
+        printGrandTotal(total, tip, tax);
         break;
 
     case 4:
@@ -190,10 +189,11 @@ int main(void)                                                          // Main 
         printf("Randomly Selected Item Number: %d\n", itemTwo);
         printf("Randomly Selected Item Number: %d\n", itemThree);
         printf("Randomly Selected Item Number: %d\n", itemFour);
+        printf("-------------------------------------\n");
         PtrToMenu ptrOne;
         ptrOne = searchItem(MenuTable, MenuTableEntries, itemOne);
         printf("Item 1: %s is $%1.2f\n", ptrOne->itemName, ptrOne->price);
-
+        
         PtrToMenu ptrTwo;
         ptrTwo = searchItem(MenuTable, MenuTableEntries, itemTwo);
         printf("Item 2: %s is $%1.2f\n", ptrTwo->itemName, ptrTwo->price);
@@ -206,16 +206,16 @@ int main(void)                                                          // Main 
         ptrFour = searchItem(MenuTable, MenuTableEntries, itemFour);
         printf("Item 4: %s is $%1.2f\n", ptrFour->itemName, ptrFour->price);
 
-        printf("--------------------------\n");
+        printf("-------------------------------------\n");
         total = calculateFourItems(ptrOne, ptrTwo, ptrThree, ptrFour);
         printf("Sub-Total for FOUR items is : $%1.2f\n", total);
 
-        printGrandTotal(total);
+        printGrandTotal(total, tip, tax);
         break;
 
     default:
         printf("Enter a valid number\n");
     }
-
-    return EXIT_SUCCESS;
+    
+    return 0;
 }
